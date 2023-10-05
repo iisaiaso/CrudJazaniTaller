@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jazani.Infastructure.Cores.Persistences
 {
-    public class CrudRepository<T, ID> : ICrudRepository<T, ID> where T : class
+    public  abstract class CrudRepository<T, ID> : ICrudRepository<T, ID> where T : class
     {
         public readonly ApplicationDbContext _dbContext;
 
@@ -13,17 +13,17 @@ namespace Jazani.Infastructure.Cores.Persistences
             _dbContext = dbContext;
         }
 
-        public async Task<IReadOnlyList<T>> FindAllAsync()
+        public virtual async Task<IReadOnlyList<T>> FindAllAsync()
         {
             return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<T?> FindByIdAsync(ID id)
+        public virtual async Task<T?> FindByIdAsync(ID id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async  Task<T> SaveAsync(T entity)
+        public virtual async  Task<T> SaveAsync(T entity)
         {
             EntityState state = _dbContext.Entry(entity).State;
             _ = state switch

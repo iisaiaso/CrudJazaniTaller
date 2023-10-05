@@ -13,6 +13,7 @@ namespace Jazani.Application.Generals.Dtos.Financialentitys.Profiles
        public FinancialentityProfile() 
         {
             CreateMap<Financialentity, FinancialentityDto>();
+            CreateMap<Financialentity, FinancialentitySimpleDto>();
             CreateMap<Financialentity, FinancialentitySaveDto>().ReverseMap();
         }
     }

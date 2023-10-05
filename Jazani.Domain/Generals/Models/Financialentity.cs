@@ -10,6 +10,8 @@
         public string? PhoneNumber { get; set; }
         public DateTime RegistrationDate { get; set; }
         public bool State {  get; set; }
-    
+
+        public ICollection<Pay> Pays { get; set; }
+
     }
 }
