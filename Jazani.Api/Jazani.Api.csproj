@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Jazani.Infastructure\Jazani.Infastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Generals\" />
+  </ItemGroup>
+
 </Project>

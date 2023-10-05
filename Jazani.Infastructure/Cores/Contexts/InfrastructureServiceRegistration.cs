@@ -1,6 +1,4 @@
-﻿using Jazani.Domain.Admins.Repositories;
-using Jazani.Infastructure.Admins.Persistences;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,9 +12,6 @@ namespace Jazani.Infastructure.Cores.Contexts
             {
                 options.UseSqlServer(configuration.GetConnectionString("DbConnection"));
             });
-
-            services.AddTransient<IStateattentionRepository, StateattentionRepository>();
-            services.AddTransient<ITupaRepository, TupaRepository>();
 
             return services;
         }

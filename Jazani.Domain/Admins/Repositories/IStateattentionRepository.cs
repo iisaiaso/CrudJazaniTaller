@@ -1,11 +1,10 @@
 ﻿using Jazani.Domain.Admins.Models;
+using Jazani.Domain.Cores.Repositories;
 
 namespace Jazani.Domain.Admins.Repositories
 {
-    public interface IStateattentionRepository
+    public interface IStateattentionRepository : ICrudRepository<Stateattention, int>
     {
-        Task<IReadOnlyList<Stateattention>> FindAllAsync();  
-        Task<Stateattention?> FindByIdAsync(int id);
-        Task<Stateattention> SaveAsync(Stateattention stateattention);
+       
     }
 }

@@ -11,9 +11,6 @@ namespace Jazani.Application.Cores.Contexts
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-           services.AddTransient<IStateattentionService, StateattentionService>();
-           services.AddTransient<ITupaService, TupaService>();
-
             return services;
         }
     }
