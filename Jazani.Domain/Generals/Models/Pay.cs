@@ -25,7 +25,7 @@ namespace Jazani.Domain.Generals.Models
      public bool State { get; set; }
      public decimal AvailableArea { get; set; }
 
-     public virtual Financialentity Financialentity { get; set;}
+     public virtual Financialentity? Financialentity { get; set;}
 
     }
 }

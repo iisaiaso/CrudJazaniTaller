@@ -2,11 +2,6 @@
 using Jazani.Application.Generals.Dtos.Financialentitys;
 using Jazani.Domain.Generals.Models;
 using Jazani.Domain.Generals.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jazani.Application.Generals.Services.Implementations
 {
@@ -32,7 +27,7 @@ namespace Jazani.Application.Generals.Services.Implementations
             return _mapper.Map<FinancialentityDto>(financialentity);
         }
 
-        public async Task<FinancialentityDto> DisableAsync(int id)
+        public async Task<FinancialentityDto> DisabledAsync(int id)
         {
             Financialentity financialentity = await _finaancialentityRepository.FindByIdAsync(id);
             financialentity.State = false;

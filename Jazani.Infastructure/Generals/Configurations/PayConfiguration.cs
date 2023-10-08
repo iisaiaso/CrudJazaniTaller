@@ -30,7 +30,9 @@ namespace Jazani.Infastructure.Generals.Configurations
             builder.Property(x => x.AvailableArea).HasColumnName("availablearea");
 
 
-            builder.HasOne(o => o.Financialentity).WithMany(many => many.Pays).HasForeignKey(fk => fk.FinancialentityId);
+            builder.HasOne(o => o.Financialentity)
+                .WithMany(many => many.Pays)
+                .HasForeignKey(fk => fk.FinancialentityId);
         }
     }
 }

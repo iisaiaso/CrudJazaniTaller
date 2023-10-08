@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Jazani.Infastructure.Admins.Configurations
 {
-    public class TupaConfiguration : IEntityTypeConfiguration<Tupa>
+    public class InvestmentConfiguration1 : IEntityTypeConfiguration<Tupa>
     {
         void IEntityTypeConfiguration<Tupa>.Configure(EntityTypeBuilder<Tupa> builder) 
         {

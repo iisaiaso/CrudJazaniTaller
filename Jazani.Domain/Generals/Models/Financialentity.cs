@@ -11,7 +11,7 @@
         public DateTime RegistrationDate { get; set; }
         public bool State {  get; set; }
 
-        public ICollection<Pay> Pays { get; set; }
+        public ICollection<Pay>? Pays { get; set; }
 
     }
 }

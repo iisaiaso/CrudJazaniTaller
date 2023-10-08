@@ -50,7 +50,7 @@ namespace Jazani.Api.Controllers.Generals
          [HttpDelete("{id}")]
          public async Task<PayDto> Delete(int id)
          {
-             return await _payService.DisableAsync(id);
+             return await _payService.DisabledAsync(id);
          }
     }
 }

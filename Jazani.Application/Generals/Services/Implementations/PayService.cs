@@ -27,14 +27,12 @@ namespace Jazani.Application.Generals.Services.Implementations
             return _mapper.Map<PayDto>(pay);
         }
 
-        public async Task<PayDto> DisableAsync(int id)
+        public async Task<PayDto> DisabledAsync(int id)
         {
             Pay pay = await _payRepository.FindByIdAsync(id);
-            pay.State=false;
+            pay.State = false;
 
-            await _payRepository.SaveAsync(pay);
-
-            return _mapper.Map<PayDto>(pay);
+            return _mapper.Map<PayDto>(pay); 
         }
 
         public async Task<PayDto> EditAsync(int id, PaySaveDto saveDto)
