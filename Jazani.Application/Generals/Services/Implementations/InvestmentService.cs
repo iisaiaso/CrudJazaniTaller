@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Jazani.Application.Cores.Contexts.Exceptions;
 using Jazani.Application.Generals.Dtos.Investments;
 using Jazani.Domain.Generals.Models;
 using Jazani.Domain.Generals.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Jazani.Application.Generals.Services.Implementations
 {
@@ -9,11 +11,12 @@ namespace Jazani.Application.Generals.Services.Implementations
     {
         private readonly IInvestmentRepository _investmentRepository;
         private readonly IMapper _mapper;
-
-        public InvestmentService(IInvestmentRepository investmentRepository, IMapper mapper)
+        private readonly ILogger<InvestmentService> _logger;
+        public InvestmentService(IInvestmentRepository investmentRepository, IMapper mapper, ILogger<InvestmentService> logger)
         {
             _investmentRepository = investmentRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<InvestmentDto> CreateAsync(InvestmentSaveDto saveDto)
@@ -30,7 +33,15 @@ namespace Jazani.Application.Generals.Services.Implementations
 
         public async Task<InvestmentDto> DisabledAsync(int id)
         {
-            Investment investment = await _investmentRepository.FindByIdAsync(id);
+            Investment? investment = await _investmentRepository.FindByIdAsync(id);
+            if (investment is null)
+            {
+                _logger.LogWarning("Tipo de mineral no encontrado para el id: " + id);
+                throw InvestmentNotFound(id);
+            }
+
+            _logger.LogInformation("Tipo de mineral {name}", investment.Description);
+
             investment.State=false;
 
             return _mapper.Map<InvestmentDto>(investment);
@@ -38,8 +49,16 @@ namespace Jazani.Application.Generals.Services.Implementations
 
         public async Task<InvestmentDto> EditAsync(int id, InvestmentSaveDto saveDto)
         {
-            Investment investment = await _investmentRepository.FindByIdAsync(id);
-           
+            Investment? investment = await _investmentRepository.FindByIdAsync(id);
+
+            if (investment is null)
+            {
+                _logger.LogWarning("Tipo de mineral no encontrado para el id: " + id);
+                throw InvestmentNotFound(id);
+            }
+
+            _logger.LogInformation("Tipo de mineral {name}", investment.Description);
+
             _mapper.Map<InvestmentSaveDto, Investment>(saveDto, investment);
 
             await _investmentRepository.SaveAsync(investment);
@@ -55,9 +74,21 @@ namespace Jazani.Application.Generals.Services.Implementations
 
         public async Task<InvestmentDto?> FindByIdAsync(int id)
         {
+            Investment? investment = await _investmentRepository.FindByIdAsync(id);
+            if (investment is null)
+            {
+                _logger.LogWarning("Tipo de mineral no encontrado para el id: " + id);
+                throw InvestmentNotFound(id);
+            }
 
-            Investment investment = await _investmentRepository.FindByIdAsync(id);
+            _logger.LogInformation("Tipo de mineral {name}", investment.Description);
+
             return _mapper.Map<InvestmentDto>(investment);
+        }
+
+        private NotFoundCoreException InvestmentNotFound(int id)
+        {
+            return new NotFoundCoreException("Tipo de mineral no encontrado para el id: " + id);
         }
     }
 }
