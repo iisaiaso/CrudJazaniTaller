@@ -60,7 +60,13 @@ namespace Jazani.Infastructure.Generals.Persistences
             }
 
 
-            query = query.OrderByDescending(x => x.Id);
+            query = query.OrderByDescending(x => x.Id)
+                 .Include(t => t.InvestmentConcept)
+            .Include(t => t.Holder)
+            .Include(t => t.InvestmentType)
+            .Include(t => t.MiningConcession)
+            .Include(t => t.MeasureUnit)
+            .Include(t => t.PeriodType);
 
 
             return await _paginator.Paginate(query, request);
