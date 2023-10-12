@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Jazani.Application.Generals.Services.Implementations
 {
-    internal class InvestmentService : IInvestmentService
+    public class InvestmentService : IInvestmentService
     {
         private readonly IInvestmentRepository _investmentRepository;
         private readonly IMapper _mapper;
